@@ -381,7 +381,19 @@ export const TestRunner = () => {
         
         const result = calculateFinancialFreedom(input, language);
         percentage = result.score;
-        level = result.category;
+        
+        // Map categoryKey to backend-compatible level
+        const mapFILevelToBackend = (categoryKey: string): string => {
+          switch (categoryKey) {
+            case 'financial_independence': return 'Expert';
+            case 'on_track': return 'High';
+            case 'building_momentum': return 'Medium';
+            case 'early_stage':
+            case 'starting_out':
+            default: return 'Low';
+          }
+        };
+        level = mapFILevelToBackend(result.categoryKey);
         
         // Store dimension scores for display
         dimensionScores = [
@@ -494,16 +506,24 @@ export const TestRunner = () => {
         }
       }
       
+      // Helper to encode Unicode-safe base64
+      const encodeToBase64 = (data: object): string => {
+        const jsonString = JSON.stringify(data);
+        return btoa(encodeURIComponent(jsonString).replace(/%([0-9A-F]{2})/g,
+          (_, p1) => String.fromCharCode(parseInt(p1, 16))
+        ));
+      };
+      
       // Navigate with appropriate data
       const queryParams = new URLSearchParams({ score: String(percentage) });
       if (financialHealthData) {
-        queryParams.set('fh', btoa(JSON.stringify(financialHealthData)));
+        queryParams.set('fh', encodeToBase64(financialHealthData));
       }
       if (financialFreedomData) {
-        queryParams.set('fi', btoa(JSON.stringify(financialFreedomData)));
+        queryParams.set('fi', encodeToBase64(financialFreedomData));
       }
       if (riskToleranceData) {
-        queryParams.set('rt', btoa(JSON.stringify(riskToleranceData)));
+        queryParams.set('rt', encodeToBase64(riskToleranceData));
       }
       
       navigate(`/result/${test.id}?${queryParams.toString()}`);

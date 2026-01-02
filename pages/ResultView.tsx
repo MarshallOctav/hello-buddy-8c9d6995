@@ -77,15 +77,31 @@ export const ResultView = () => {
 
   const userPlan = user?.plan || AccessLevel.FREE;
 
+  // Helper to decode Unicode-safe base64
+  const decodeFromBase64 = <T,>(encoded: string): T | null => {
+    try {
+      const jsonString = decodeURIComponent(
+        atob(encoded).split('').map(c => 
+          '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        ).join('')
+      );
+      return JSON.parse(jsonString) as T;
+    } catch {
+      return null;
+    }
+  };
+
   // Parse Financial Health data from URL if available
   const financialHealthData = useMemo(() => {
     const fhParam = searchParams.get('fh');
     if (fhParam && id === 't1') {
-      try {
-        return JSON.parse(atob(fhParam));
-      } catch {
-        return null;
-      }
+      return decodeFromBase64<{
+        percentages: { needs: number; wants: number; savings: number };
+        ideal: { needs: number; wants: number; savings: number };
+        insights: string[];
+        rawValues: Record<string, number>;
+        categoryKey: string;
+      }>(fhParam);
     }
     return null;
   }, [searchParams, id]);
