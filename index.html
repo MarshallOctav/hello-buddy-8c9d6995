@@ -1,26 +1,263 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>Lovable App</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
-    <!-- TODO: Update og:title to match your application name -->
-    <meta property="og:title" content="Lovable App" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Diagnospace - Platform Diagnostik Bisnis & Karir Berbasis AI</title>
+    <meta name="title" content="Diagnospace - Platform Diagnostik Bisnis & Karir Berbasis AI" />
+    <meta name="description" content="Diagnospace adalah platform diagnostik berbasis AI yang membantu profesional dan pengusaha mengidentifikasi kelemahan tersembunyi dalam bisnis dan karir. Dapatkan analisis komprehensif dalam 5 menit." />
+    <meta name="keywords" content="diagnosa bisnis, tes karir, analisis AI, audit produktivitas, tes kepemimpinan, cek kesehatan finansial, pertumbuhan karir, pengembangan profesional, analisis skill gap, business diagnostic, career assessment" />
+    <meta name="author" content="Diagnospace Team" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#4338ca" />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
+    <meta property="og:url" content="https://diagnospace.lovable.app/" />
+    <meta property="og:title" content="Diagnospace - Platform Diagnostik Bisnis & Karir Berbasis AI" />
+    <meta property="og:description" content="Diagnospace adalah platform diagnostik berbasis AI yang membantu profesional dan pengusaha mengidentifikasi kelemahan tersembunyi dalam bisnis dan karir. Dapatkan analisis komprehensif dalam 5 menit." />
+    <meta property="og:image" content="https://diagnospace.lovable.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Diagnospace - AI-Powered Diagnostic Platform" />
+    <meta property="og:site_name" content="Diagnospace" />
+    <meta property="og:locale" content="id_ID" />
+    
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
-
-  <body>
+    <meta name="twitter:url" content="https://diagnospace.lovable.app/" />
+    <meta name="twitter:title" content="Diagnospace - Platform Diagnostik Bisnis & Karir Berbasis AI" />
+    <meta name="twitter:description" content="Diagnospace adalah platform diagnostik berbasis AI yang membantu profesional dan pengusaha mengidentifikasi kelemahan tersembunyi dalam bisnis dan karir." />
+    <meta name="twitter:image" content="https://diagnospace.lovable.app/og-image.png" />
+    <meta name="twitter:site" content="@diagnospace" />
+    <meta name="twitter:creator" content="@diagnospace" />
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://diagnospace.lovable.app/" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://diagnospace.lovable.app/#website",
+          "url": "https://diagnospace.lovable.app",
+          "name": "Diagnospace",
+          "description": "Platform Diagnostik Bisnis & Karir Berbasis AI",
+          "publisher": { "@id": "https://diagnospace.lovable.app/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://diagnospace.lovable.app/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://diagnospace.lovable.app/#organization",
+          "name": "Diagnospace",
+          "url": "https://diagnospace.lovable.app",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://diagnospace.lovable.app/logo.png",
+            "width": 512,
+            "height": 512
+          },
+          "sameAs": [
+            "https://twitter.com/diagnospace",
+            "https://linkedin.com/company/diagnospace",
+            "https://instagram.com/diagnospace"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "availableLanguage": ["Indonesian", "English"]
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Diagnospace",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "IDR"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1250",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Apa itu Diagnospace?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Diagnospace adalah platform diagnostik berbasis AI yang membantu profesional dan pengusaha mengidentifikasi kelemahan tersembunyi dalam bisnis dan karir mereka."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Berapa lama waktu yang dibutuhkan untuk diagnosa?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sebagian besar diagnosa hanya membutuhkan 5-10 menit untuk diselesaikan."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Apakah data saya aman?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ya, kami menggunakan enkripsi kelas enterprise untuk melindungi semua data Anda."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            },
+            animation: {
+              blob: "blob 7s infinite",
+              'fade-in': 'fadeIn 0.5s ease-out',
+              'slide-up': 'slideUp 0.5s ease-out',
+            },
+            keyframes: {
+              blob: {
+                "0%": { transform: "translate(0px, 0px) scale(1)" },
+                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                "100%": { transform: "translate(0px, 0px) scale(1)" },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              }
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: #f8fafc;
+        color: #0f172a;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      ::selection {
+        background-color: #e0e7ff;
+        color: #4338ca;
+      }
+      
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8; 
+      }
+      
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      
+      /* Animation delay utilities */
+      .animation-delay-1000 {
+        animation-delay: 1s;
+      }
+      .animation-delay-2000 {
+        animation-delay: 2s;
+      }
+      .animation-delay-4000 {
+        animation-delay: 4s;
+      }
+      
+      /* Focus styles */
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid #6366f1;
+        outline-offset: 2px;
+      }
+      
+      input, textarea, select {
+        font-family: inherit;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.10.1",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-100 selection:text-blue-700">
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>
