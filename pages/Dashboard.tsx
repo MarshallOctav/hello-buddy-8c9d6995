@@ -700,26 +700,108 @@ export const Dashboard = () => {
             {activeTab === 'leaderboard' && (
                 <div className="space-y-6 animate-fade-in">
                     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-                        <div className="p-6 border-b border-slate-100">
-                            <h2 className="text-xl font-black text-slate-900 flex items-center gap-2">
-                                <Trophy className="h-6 w-6 text-yellow-500" />
+                        <div className="p-4 sm:p-6 border-b border-slate-100">
+                            <h2 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+                                <Trophy className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-500" />
                                 {content.dashboard.tabs.leaderboard}
                             </h2>
-                            <p className="text-sm text-slate-500 mt-1">{language === 'id' ? 'Kompetisi mingguan para profesional' : 'Weekly competition among professionals'}</p>
+                            <p className="text-xs sm:text-sm text-slate-500 mt-1">{language === 'id' ? 'Kompetisi mingguan para profesional' : 'Weekly competition among professionals'}</p>
                         </div>
-                        <table className="min-w-full divide-y divide-slate-100">
+                        
+                        {/* Mobile Card View */}
+                        <div className="sm:hidden divide-y divide-slate-100">
+                            {leaderboard.map((item, idx) => (
+                                <div key={item.id} className={`p-4 ${item.isMe ? 'bg-indigo-50' : ''}`}>
+                                    <div className="flex items-center gap-3">
+                                        {/* Rank */}
+                                        <div className={`flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-full font-black text-sm ${
+                                            idx === 0 ? 'bg-yellow-100 text-yellow-700' :
+                                            idx === 1 ? 'bg-slate-200 text-slate-700' :
+                                            idx === 2 ? 'bg-orange-100 text-orange-700' :
+                                            'bg-slate-50 text-slate-500'
+                                        }`}>
+                                            {idx === 0 ? <Crown className="h-5 w-5" /> : idx + 1}
+                                        </div>
+                                        
+                                        {/* Avatar & Name */}
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex items-center gap-2">
+                                                {item.avatarUrl ? (
+                                                    <img 
+                                                        src={item.avatarUrl.startsWith('http') ? item.avatarUrl : `http://localhost:8000${item.avatarUrl}`}
+                                                        alt={item.name}
+                                                        className="h-10 w-10 rounded-full object-cover border-2 border-slate-200 flex-shrink-0"
+                                                        onError={(e) => {
+                                                            e.currentTarget.style.display = 'none';
+                                                            e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                                                        }}
+                                                    />
+                                                ) : null}
+                                                <div className={`h-10 w-10 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center font-black text-sm text-white flex-shrink-0 ${item.avatarUrl ? 'hidden' : ''}`}>
+                                                    {item.name.charAt(0)}
+                                                </div>
+                                                <div className="min-w-0">
+                                                    <div className="text-sm font-black text-slate-900 truncate flex items-center gap-1.5">
+                                                        {item.name}
+                                                        {item.isMe && <span className="text-[8px] bg-indigo-600 text-white px-1.5 py-0.5 rounded-full uppercase font-black flex-shrink-0">{language === 'id' ? 'Anda' : 'You'}</span>}
+                                                    </div>
+                                                    <div className="text-[10px] text-green-600 font-bold">{item.trend}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        {/* Points */}
+                                        <div className="flex-shrink-0 text-right">
+                                            <div className="flex items-center gap-1">
+                                                <Star className="h-3.5 w-3.5 text-yellow-500" />
+                                                <span className="text-sm font-black text-slate-900">{item.points.toLocaleString()}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Badges */}
+                                    <div className="mt-3 flex gap-1 flex-wrap">
+                                        {item.badgeList && item.badgeList.length > 0 ? (
+                                            item.badgeList.slice(0, 4).map((badge: any, i: number) => (
+                                                <div 
+                                                    key={badge.id || i} 
+                                                    className={`h-6 w-6 rounded-full flex items-center justify-center ${badge.color || 'bg-purple-100 text-purple-600'}`}
+                                                    title={badge.name}
+                                                >
+                                                    {getBadgeIcon(badge.icon)}
+                                                </div>
+                                            ))
+                                        ) : item.badges > 0 ? (
+                                            Array.from({ length: Math.min(item.badges, 4) }).map((_, i) => (
+                                                <div key={i} className="h-6 w-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center">
+                                                    <Award className="h-3 w-3" />
+                                                </div>
+                                            ))
+                                        ) : null}
+                                        {item.badgeList && item.badgeList.length > 4 && (
+                                            <div className="h-6 w-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-[10px] font-bold">
+                                                +{item.badgeList.length - 4}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        {/* Desktop Table View */}
+                        <table className="hidden sm:table min-w-full divide-y divide-slate-100">
                             <thead className="bg-slate-50">
                                 <tr>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">{content.dashboard.leaderboard.rank}</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">{content.dashboard.leaderboard.user}</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">{content.dashboard.leaderboard.points}</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">{content.dashboard.leaderboard.badges}</th>
+                                    <th className="px-4 lg:px-8 py-4 lg:py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">{content.dashboard.leaderboard.rank}</th>
+                                    <th className="px-4 lg:px-8 py-4 lg:py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">{content.dashboard.leaderboard.user}</th>
+                                    <th className="px-4 lg:px-8 py-4 lg:py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">{content.dashboard.leaderboard.points}</th>
+                                    <th className="px-4 lg:px-8 py-4 lg:py-5 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">{content.dashboard.leaderboard.badges}</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
                                 {leaderboard.map((item, idx) => (
                                     <tr key={item.id} className={`transition-colors ${item.isMe ? 'bg-indigo-50' : 'hover:bg-slate-50'}`}>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 lg:px-8 py-4 lg:py-6">
                                             <div className={`flex h-10 w-10 items-center justify-center rounded-full font-black text-sm ${
                                                 idx === 0 ? 'bg-yellow-100 text-yellow-700' :
                                                 idx === 1 ? 'bg-slate-200 text-slate-700' :
@@ -729,20 +811,20 @@ export const Dashboard = () => {
                                                 {idx === 0 ? <Crown className="h-5 w-5" /> : idx + 1}
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-4">
+                                        <td className="px-4 lg:px-8 py-4 lg:py-6">
+                                            <div className="flex items-center gap-3 lg:gap-4">
                                                 {item.avatarUrl ? (
                                                     <img 
                                                         src={item.avatarUrl.startsWith('http') ? item.avatarUrl : `http://localhost:8000${item.avatarUrl}`}
                                                         alt={item.name}
-                                                        className="h-12 w-12 rounded-full object-cover border-2 border-slate-200"
+                                                        className="h-10 w-10 lg:h-12 lg:w-12 rounded-full object-cover border-2 border-slate-200"
                                                         onError={(e) => {
                                                             e.currentTarget.style.display = 'none';
                                                             e.currentTarget.nextElementSibling?.classList.remove('hidden');
                                                         }}
                                                     />
                                                 ) : null}
-                                                <div className={`h-12 w-12 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center font-black text-lg text-white ${item.avatarUrl ? 'hidden' : ''}`}>
+                                                <div className={`h-10 w-10 lg:h-12 lg:w-12 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center font-black text-base lg:text-lg text-white ${item.avatarUrl ? 'hidden' : ''}`}>
                                                     {item.name.charAt(0)}
                                                 </div>
                                                 <div>
@@ -754,13 +836,13 @@ export const Dashboard = () => {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 lg:px-8 py-4 lg:py-6">
                                             <div className="flex items-center gap-2">
                                                 <Star className="h-4 w-4 text-yellow-500" />
                                                 <span className="text-sm font-black text-slate-900">{item.points.toLocaleString()}</span>
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 lg:px-8 py-4 lg:py-6">
                                             <div className="flex gap-1 flex-wrap">
                                                 {item.badgeList && item.badgeList.length > 0 ? (
                                                     item.badgeList.slice(0, 5).map((badge: any, i: number) => (
