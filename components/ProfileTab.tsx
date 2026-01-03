@@ -201,18 +201,18 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
   const text = t[language as keyof typeof t] || t.en;
 
   return (
-    <div className="space-y-6 animate-fade-in">
-      <div className="rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
+      <div className="rounded-2xl sm:rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
         {/* Profile Header */}
-        <div className="bg-gradient-to-r from-indigo-600 to-blue-600 p-8 text-white relative">
+        <div className="bg-gradient-to-r from-indigo-600 to-blue-600 p-4 sm:p-8 text-white relative">
           {showSaved && (
-            <div className="absolute top-4 right-4 flex items-center gap-2 px-4 py-2 bg-green-500 rounded-full animate-fade-in">
-              <Check className="h-4 w-4" />
-              <span className="text-sm font-bold">{text.saved}</span>
+            <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-green-500 rounded-full animate-fade-in">
+              <Check className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm font-bold">{text.saved}</span>
             </div>
           )}
           
-          <div className="flex flex-col md:flex-row items-center gap-6">
+          <div className="flex flex-col items-center gap-4 sm:gap-6 md:flex-row">
             {/* Avatar with upload functionality */}
             <div className="relative group">
               <input
@@ -227,10 +227,10 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
                 <img
                   src={`http://localhost:8000${user.avatarUrl}`}
                   alt={user.name}
-                  className="h-24 w-24 rounded-full object-cover border-4 border-white/30"
+                  className="h-20 w-20 sm:h-24 sm:w-24 rounded-full object-cover border-4 border-white/30"
                 />
               ) : (
-                <div className="h-24 w-24 rounded-full bg-white/20 flex items-center justify-center text-4xl font-black border-4 border-white/30">
+                <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-white/20 flex items-center justify-center text-3xl sm:text-4xl font-black border-4 border-white/30">
                   {user.name.charAt(0)}
                 </div>
               )}
@@ -238,51 +238,51 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
               {/* Avatar overlay with actions */}
               <div className="absolute inset-0 rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                 {isUploadingAvatar ? (
-                  <Loader2 className="h-6 w-6 animate-spin text-white" />
+                  <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 animate-spin text-white" />
                 ) : (
                   <>
                     <button
                       type="button"
                       onClick={handleAvatarClick}
-                      className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors"
+                      className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors"
                       title={text.changePhoto}
                     >
-                      <Camera className="h-4 w-4 text-white" />
+                      <Camera className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white" />
                     </button>
                     {user.avatarUrl && (
                       <button
                         type="button"
                         onClick={handleDeleteAvatar}
-                        className="p-2 bg-red-500/50 hover:bg-red-500/70 rounded-full transition-colors"
+                        className="p-1.5 sm:p-2 bg-red-500/50 hover:bg-red-500/70 rounded-full transition-colors"
                         title={text.deletePhoto}
                       >
-                        <Trash2 className="h-4 w-4 text-white" />
+                        <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white" />
                       </button>
                     )}
                   </>
                 )}
               </div>
             </div>
-            <div className="text-center md:text-left">
-              <h2 className="text-2xl font-black">{user.name}</h2>
+            <div className="text-center md:text-left flex-1 min-w-0">
+              <h2 className="text-xl sm:text-2xl font-black truncate">{user.name}</h2>
               {user.role && (
-                <p className="text-indigo-200 font-semibold mt-0.5">{user.role}</p>
+                <p className="text-indigo-200 font-semibold mt-0.5 text-sm sm:text-base truncate">{user.role}</p>
               )}
-              <p className="text-indigo-200/80 font-medium mt-1">{user.email}</p>
-              <div className="flex items-center justify-center md:justify-start gap-3 mt-3">
-                <span className="px-3 py-1 bg-white/20 rounded-full text-xs font-black uppercase tracking-wider">
+              <p className="text-indigo-200/80 font-medium mt-1 text-sm truncate">{user.email}</p>
+              <div className="flex items-center justify-center md:justify-start gap-2 sm:gap-3 mt-3 flex-wrap">
+                <span className="px-2 sm:px-3 py-1 bg-white/20 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider">
                   {user.plan} Plan
                 </span>
-                <span className="text-xs text-indigo-200">{language === 'id' ? 'Bergabung' : 'Joined'} {user.joinedDate || 'Jan 2024'}</span>
+                <span className="text-[10px] sm:text-xs text-indigo-200">{language === 'id' ? 'Bergabung' : 'Joined'} {user.joinedDate || 'Jan 2024'}</span>
               </div>
             </div>
             
             {/* Edit Button */}
-            <div className="md:ml-auto">
+            <div className="w-full md:w-auto md:ml-auto mt-2 md:mt-0">
               {!isEditing ? (
                 <button 
                   onClick={() => setIsEditing(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl transition-colors"
+                  className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl transition-colors"
                 >
                   <Edit2 className="h-4 w-4" />
                   <span className="font-bold text-sm">{text.editProfile}</span>
@@ -290,7 +290,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
               ) : (
                 <button 
                   onClick={handleCancel}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 rounded-xl transition-colors"
+                  className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 rounded-xl transition-colors"
                 >
                   <X className="h-4 w-4" />
                   <span className="font-bold text-sm">{text.cancel}</span>
@@ -301,13 +301,13 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
         </div>
         
         {/* Profile Content */}
-        <div className="p-8">
-          <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-2">
-            <UserIcon className="h-5 w-5 text-slate-400" />
+        <div className="p-4 sm:p-8">
+          <h3 className="text-base sm:text-lg font-black text-slate-900 mb-4 sm:mb-6 flex items-center gap-2">
+            <UserIcon className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400" />
             {content.dashboard.profile.personalInfo}
           </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {/* Row 1: Full Name & Phone */}
             <div>
               <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-2">
@@ -318,12 +318,12 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                  className="w-full px-4 py-4 bg-white rounded-xl border-2 border-indigo-200 focus:border-indigo-500 focus:ring-0 font-bold text-slate-900 transition-colors"
+                  className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-white rounded-xl border-2 border-indigo-200 focus:border-indigo-500 focus:ring-0 font-bold text-slate-900 transition-colors text-sm sm:text-base"
                 />
               ) : (
-                <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                  <UserIcon className="h-5 w-5 text-slate-400" />
-                  <span className="font-bold text-slate-900">{user.name}</span>
+                <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-slate-50 rounded-xl border border-slate-100">
+                  <UserIcon className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 flex-shrink-0" />
+                  <span className="font-bold text-slate-900 text-sm sm:text-base truncate">{user.name}</span>
                 </div>
               )}
             </div>
@@ -338,12 +338,12 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
                   value={editPhone}
                   onChange={(e) => setEditPhone(e.target.value)}
                   placeholder={text.phonePlaceholder}
-                  className="w-full px-4 py-4 bg-white rounded-xl border-2 border-indigo-200 focus:border-indigo-500 focus:ring-0 font-bold text-slate-900 transition-colors"
+                  className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-white rounded-xl border-2 border-indigo-200 focus:border-indigo-500 focus:ring-0 font-bold text-slate-900 transition-colors text-sm sm:text-base"
                 />
               ) : (
-                <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                  <Phone className="h-5 w-5 text-slate-400" />
-                  <span className="font-bold text-slate-900">{user.phone || '-'}</span>
+                <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-slate-50 rounded-xl border border-slate-100">
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 flex-shrink-0" />
+                  <span className="font-bold text-slate-900 text-sm sm:text-base">{user.phone || '-'}</span>
                 </div>
               )}
             </div>
@@ -353,9 +353,9 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
               <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-2">
                 {content.dashboard.profile.email}
               </label>
-              <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                <Mail className="h-5 w-5 text-slate-400" />
-                <span className="font-bold text-slate-900 flex-1">{user.email}</span>
+              <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 flex-shrink-0" />
+                <span className="font-bold text-slate-900 text-sm sm:text-base flex-1 truncate">{user.email}</span>
               </div>
               {isEditing && (
                 <button
@@ -372,22 +372,22 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
               <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-2">
                 {content.dashboard.profile.memberSince}
               </label>
-              <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                <Calendar className="h-5 w-5 text-slate-400" />
-                <span className="font-bold text-slate-900">{user.joinedDate || 'January 2024'}</span>
+              <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 flex-shrink-0" />
+                <span className="font-bold text-slate-900 text-sm sm:text-base">{user.joinedDate || 'January 2024'}</span>
               </div>
             </div>
           </div>
 
           {/* Error Message */}
           {errorMessage && (
-            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm font-medium">
+            <div className="mt-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-xs sm:text-sm font-medium">
               {errorMessage}
             </div>
           )}
 
           {/* Bio Section */}
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-2">
               {text.bio}
             </label>
@@ -397,11 +397,11 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
                 onChange={(e) => setEditBio(e.target.value)}
                 placeholder={text.bioPlaceholder}
                 rows={3}
-                className="w-full px-4 py-4 bg-white rounded-xl border-2 border-indigo-200 focus:border-indigo-500 focus:ring-0 font-medium text-slate-900 transition-colors resize-none"
+                className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-white rounded-xl border-2 border-indigo-200 focus:border-indigo-500 focus:ring-0 font-medium text-slate-900 transition-colors resize-none text-sm sm:text-base"
               />
             ) : (
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                <p className="text-sm text-slate-600 leading-relaxed">
+              <div className="p-3 sm:p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   {user.bio || (language === 'id' ? 'Belum ada bio. Klik Edit Profil untuk menambahkan.' : 'No bio yet. Click Edit Profile to add one.')}
                 </p>
               </div>
@@ -409,47 +409,47 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
           </div>
           
           {/* Stats Summary */}
-          <div className="mt-8 pt-8 border-t border-slate-100">
-            <h3 className="text-lg font-black text-slate-900 mb-6">{content.dashboard.profile.accountStatus}</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-4 bg-blue-50 rounded-2xl text-center">
-                <p className="text-2xl font-black text-blue-600">{completedTests}</p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-blue-400 mt-1">{content.dashboard.stats.tests}</p>
+          <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-slate-100">
+            <h3 className="text-base sm:text-lg font-black text-slate-900 mb-4 sm:mb-6">{content.dashboard.profile.accountStatus}</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              <div className="p-3 sm:p-4 bg-blue-50 rounded-xl sm:rounded-2xl text-center">
+                <p className="text-xl sm:text-2xl font-black text-blue-600">{completedTests}</p>
+                <p className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-blue-400 mt-1">{content.dashboard.stats.tests}</p>
               </div>
-              <div className="p-4 bg-green-50 rounded-2xl text-center">
-                <p className="text-2xl font-black text-green-600">{avgScore}%</p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-green-400 mt-1">{content.dashboard.stats.score}</p>
+              <div className="p-3 sm:p-4 bg-green-50 rounded-xl sm:rounded-2xl text-center">
+                <p className="text-xl sm:text-2xl font-black text-green-600">{avgScore}%</p>
+                <p className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-green-400 mt-1">{content.dashboard.stats.score}</p>
               </div>
-              <div className="p-4 bg-yellow-50 rounded-2xl text-center">
-                <p className="text-2xl font-black text-yellow-600">{totalXP}</p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-yellow-500 mt-1">{content.dashboard.stats.xp}</p>
+              <div className="p-3 sm:p-4 bg-yellow-50 rounded-xl sm:rounded-2xl text-center">
+                <p className="text-xl sm:text-2xl font-black text-yellow-600">{totalXP}</p>
+                <p className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-yellow-500 mt-1">{content.dashboard.stats.xp}</p>
               </div>
-              <div className="p-4 bg-orange-50 rounded-2xl text-center">
-                <p className="text-2xl font-black text-orange-600">{currentStreak}</p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-orange-400 mt-1">{content.dashboard.stats.streak}</p>
+              <div className="p-3 sm:p-4 bg-orange-50 rounded-xl sm:rounded-2xl text-center">
+                <p className="text-xl sm:text-2xl font-black text-orange-600">{currentStreak}</p>
+                <p className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-orange-400 mt-1">{content.dashboard.stats.streak}</p>
               </div>
             </div>
           </div>
           
           {/* Actions */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
             {isEditing ? (
               <>
                 <Button 
                   variant="primary" 
-                  className="flex-1 h-14 rounded-2xl"
+                  className="flex-1 h-12 sm:h-14 rounded-xl sm:rounded-2xl text-sm sm:text-base"
                   onClick={handleSave}
                   isLoading={isSaving}
                 >
-                  <Save className="mr-2 h-5 w-5" />
+                  <Save className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   {isSaving ? text.saving : content.dashboard.profile.save}
                 </Button>
                 <Button 
                   variant="outline" 
-                  className="flex-1 h-14 rounded-2xl border-slate-300"
+                  className="flex-1 h-12 sm:h-14 rounded-xl sm:rounded-2xl border-slate-300 text-sm sm:text-base"
                   onClick={handleCancel}
                 >
-                  <X className="mr-2 h-5 w-5" />
+                  <X className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   {text.cancel}
                 </Button>
               </>
@@ -457,18 +457,18 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
               <>
                 <Button 
                   variant="primary" 
-                  className="flex-1 h-14 rounded-2xl"
+                  className="flex-1 h-12 sm:h-14 rounded-xl sm:rounded-2xl text-sm sm:text-base"
                   onClick={() => setIsEditing(true)}
                 >
-                  <Edit2 className="mr-2 h-5 w-5" />
+                  <Edit2 className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   {text.editProfile}
                 </Button>
                 <Button 
                   variant="gradient" 
                   onClick={() => navigate('/plans')} 
-                  className="flex-1 h-14 rounded-2xl shadow-lg shadow-indigo-500/30"
+                  className="flex-1 h-12 sm:h-14 rounded-xl sm:rounded-2xl shadow-lg shadow-indigo-500/30 text-sm sm:text-base"
                 >
-                  <ArrowUpRight className="mr-2 h-5 w-5" />
+                  <ArrowUpRight className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   {content.dashboard.profile.upgrade}
                 </Button>
               </>
