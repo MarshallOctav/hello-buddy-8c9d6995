@@ -523,24 +523,24 @@ export const Dashboard = () => {
 
                     {/* Prescriptions */}
                     <div>
-                        <div className="mb-6 flex items-center justify-between px-1">
-                            <h2 className="text-xl font-black text-slate-900">{content.dashboard.recommended}</h2>
-                            <Link to="/catalog" className="text-sm font-bold text-blue-600 hover:underline">{content.dashboard.viewAll}</Link>
+                        <div className="mb-4 sm:mb-6 flex items-center justify-between px-1">
+                            <h2 className="text-lg sm:text-xl font-black text-slate-900">{content.dashboard.recommended}</h2>
+                            <Link to="/catalog" className="text-xs sm:text-sm font-bold text-blue-600 hover:underline">{content.dashboard.viewAll}</Link>
                         </div>
-                        <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-1 gap-3 sm:gap-4">
                             {tests.slice(0, 3).map((test) => (
-                                <div key={test.id} className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-blue-200 hover:shadow-xl">
-                                    <div className="flex items-center gap-5">
-                                        <div className="h-16 w-16 flex items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-colors group-hover:bg-blue-50 group-hover:text-blue-600">
-                                          <PlayCircle className="h-8 w-8" />
+                                <div key={test.id} className="group relative flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center justify-between rounded-2xl sm:rounded-3xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm transition-all hover:border-blue-200 hover:shadow-xl">
+                                    <div className="flex items-center gap-3 sm:gap-5">
+                                        <div className="h-12 w-12 sm:h-16 sm:w-16 flex items-center justify-center rounded-xl sm:rounded-2xl bg-slate-50 text-slate-900 transition-colors group-hover:bg-blue-50 group-hover:text-blue-600 shrink-0">
+                                          <PlayCircle className="h-6 w-6 sm:h-8 sm:w-8" />
                                         </div>
-                                        <div>
-                                            <h3 className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{test.title}</h3>
-                                            <p className="text-xs font-black uppercase tracking-wider text-slate-400 mt-1">{test.category} • {test.durationMinutes} min</p>
+                                        <div className="min-w-0 flex-1">
+                                            <h3 className="font-bold text-sm sm:text-base text-slate-900 group-hover:text-blue-600 transition-colors truncate">{test.title}</h3>
+                                            <p className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-slate-400 mt-0.5 sm:mt-1">{test.category} • {test.durationMinutes} min</p>
                                         </div>
                                     </div>
-                                    <Link to={`/test/${test.id}`} className="shrink-0">
-                                        <Button size="md" variant="primary" className="rounded-xl h-12 px-8">
+                                    <Link to={`/test/${test.id}`} className="shrink-0 w-full sm:w-auto">
+                                        <Button size="md" variant="primary" className="rounded-xl h-10 sm:h-12 px-4 sm:px-8 w-full sm:w-auto text-sm sm:text-base">
                                             {content.dashboard.start}
                                         </Button>
                                     </Link>
