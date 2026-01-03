@@ -183,15 +183,6 @@ const Navbar = () => {
               {/* Desktop Profile Dropdown */}
               {isProfileDropdownOpen && (
                 <div className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 py-2 z-50">
-                  <Link 
-                    to="/dashboard?tab=profile" 
-                    onClick={() => setIsProfileDropdownOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors"
-                  >
-                    <User className="h-4 w-4" />
-                    {language === 'id' ? 'Profil Saya' : 'My Profile'}
-                  </Link>
-                  <div className="h-px bg-border mx-2 my-1" />
                   <button 
                     onClick={() => { handleLogout(); setIsProfileDropdownOpen(false); }}
                     className="flex items-center gap-3 px-4 py-3 text-sm text-destructive hover:bg-destructive/10 transition-colors w-full"
@@ -276,14 +267,6 @@ const Navbar = () => {
                   </div>
                 </div>
                 
-                <Link 
-                  to="/dashboard?tab=profile" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 py-3 px-4 text-sm font-medium text-foreground hover:bg-muted rounded-xl w-full"
-                >
-                  <User className="h-4 w-4" />
-                  {language === 'id' ? 'Profil Saya' : 'My Profile'}
-                </Link>
                 
                 <Button onClick={handleLogout} variant="outline" className="w-full text-destructive border-destructive/20 hover:bg-destructive/10">
                   <LogOut className="mr-2 h-4 w-4" /> {content.nav.logout}
