@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../services/authContext';
 import { useLanguage } from '../services/languageContext';
 
-import { Activity, LayoutDashboard, LogOut, Menu, X, Globe, ChevronRight, MessageSquarePlus, Star, Send, CheckCircle2, ScrollText, Shield, Compass, Stethoscope, User, ChevronDown } from 'lucide-react';
+import { Activity, LayoutDashboard, LogOut, Menu, X, Globe, ChevronRight, ScrollText, Shield, Compass, Stethoscope, User, ChevronDown } from 'lucide-react';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import NotificationBell from './NotificationBell';
 
@@ -369,25 +369,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
 export const Layout = ({ children }: React.PropsWithChildren) => {
   const { content } = useLanguage();
   const location = useLocation();
-  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const [rating, setRating] = useState(0);
-  const [category, setCategory] = useState('general');
-  const [comment, setComment] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [legalDoc, setLegalDoc] = useState<'privacy' | 'terms' | null>(null);
-
-  const handleSubmitFeedback = () => {
-    setTimeout(() => {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsFeedbackOpen(false);
-        setIsSubmitted(false);
-        setRating(0);
-        setComment('');
-        setCategory('general');
-      }, 2000);
-    }, 800);
-  };
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -396,86 +378,6 @@ export const Layout = ({ children }: React.PropsWithChildren) => {
         {children}
       </main>
       <Footer onOpenLegal={setLegalDoc} />
-
-      <button 
-        onClick={() => setIsFeedbackOpen(true)}
-        className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg shadow-indigo-500/30 transition-all hover:scale-110"
-        title={content.feedback.trigger}
-      >
-        <MessageSquarePlus className="h-6 w-6" />
-      </button>
-
-      <Modal 
-        isOpen={isFeedbackOpen} 
-        onClose={() => setIsFeedbackOpen(false)} 
-        title={content.feedback.title}
-      >
-        <div className="space-y-6 p-1">
-          {isSubmitted ? (
-            <div className="flex flex-col items-center justify-center py-8 text-center">
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
-                <CheckCircle2 className="h-8 w-8" />
-              </div>
-              <h3 className="text-xl font-bold text-foreground">{content.feedback.success}</h3>
-              <Button onClick={() => setIsFeedbackOpen(false)} className="mt-6">
-                {content.feedback.close}
-              </Button>
-            </div>
-          ) : (
-            <>
-              <div>
-                <label className="mb-2 block text-sm font-bold text-foreground">{content.feedback.rating}</label>
-                <div className="flex gap-2">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      onClick={() => setRating(star)}
-                      className={`transition-transform hover:scale-110 ${rating >= star ? 'text-amber-400' : 'text-muted'}`}
-                    >
-                      <Star className="h-8 w-8 fill-current" />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-bold text-foreground">{content.feedback.category}</label>
-                <div className="flex flex-wrap gap-2">
-                  {Object.entries(content.feedback.categories).map(([key, label]) => (
-                    <button
-                      key={key}
-                      onClick={() => setCategory(key)}
-                      className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all ${
-                        category === key 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-muted text-muted-foreground hover:bg-muted/80'
-                      }`}
-                    >
-                      {label as string}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-bold text-foreground">{content.feedback.comment}</label>
-                <textarea 
-                  rows={4}
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  className="w-full rounded-xl border-border bg-muted p-4 text-sm text-foreground focus:border-primary focus:ring-primary"
-                  placeholder="..."
-                />
-              </div>
-
-              <Button onClick={handleSubmitFeedback} variant="gradient" className="w-full justify-center" disabled={!rating}>
-                <Send className="mr-2 h-4 w-4" />
-                {content.feedback.submit}
-              </Button>
-            </>
-          )}
-        </div>
-      </Modal>
 
       <Modal 
         isOpen={!!legalDoc} 
